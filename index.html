@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uday Kiran Sahukari | Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">UDAY.K</div>
+        <div class="nav-links">
+            <button class="tab-link active" onclick="openTab(event, 'home')">Home</button>
+            <button class="tab-link" onclick="openTab(event, 'experience')">Experience</button>
+            <button class="tab-link" onclick="openTab(event, 'projects')">Projects</button>
+            <button class="tab-link" onclick="openTab(event, 'contact')">Contact</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section id="home" class="tab-content active">
+            <div class="hero">
+                <h1>Uday Kiran <span class="highlight">Sahukari</span></h1>
+                <h3>Java Backend Developer & Analyst</h3>
+                <p>Detail-oriented developer with expertise in creating scalable solutions using Java and Spring frameworks.</p>
+                <div class="hero-btns">
+                    <a href="UDAY-KIRAN-SAHUKARI1.pdf" download class="download-btn">Download Resume (PDF)</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="tab-content">
+            <h2>Professional Experience</h2>
+            <div class="exp-item">
+                <div class="exp-header">
+                    <h4>Analyst | GlobalLogic Technologies</h4>
+                    <span>06/2024 - Present</span>
+                </div>
+                <ul>
+                    <li>Evaluated optimal responses for technical accuracy and clarity.</li>
+                    <li>Mapped 3D coordinates for spatial AR recognition using internal tools.</li>
+                </ul>
+            </div>
+            <div class="exp-item">
+                <div class="exp-header">
+                    <h4>Java Backend Intern | Kosuri Softlabs</h4>
+                    <span>01/2024 - 06/2024</span>
+                </div>
+                <ul>
+                    <li>Optimized modules for user authentication and dashboard views using Spring Boot.</li>
+                    <li>Designed RESTful APIs for secure data exchange.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="projects" class="tab-content">
+            <h2>Core Projects</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>MrMason (HRMS)</h3>
+                    <p>Streamlined core HR functions, dashboard analytics, and customer data management.</p>
+                    <span class="tag">Spring Boot</span> <span class="tag">Java</span>
+                </div>
+                <div class="card">
+                    <h3>AR Annotation</h3>
+                    <p>Enabling users to annotate real-world environments using augmented reality technology.</p>
+                    <span class="tag">AR Tech</span> <span class="tag">Data Quality</span>
+                </div>
+            </div>
+        </section>
+
+       <div id="local-clock" class="clock-display"></div>
+
+<section id="contact" class="tab-content">
+    <h2>Get In Touch</h2>
+    <div class="contact-container">
+        <div class="info-block">
+            <p>📧 <a href="mailto:udaykiransahukari@gmail.com">udaykiransahukari@gmail.com</a> [cite: 2]</p>
+            <p>📍 Hyderabad, India [cite: 6]</p>
+            <p>🔗 LinkedIn: <a href="https://linkedin.com/in/udayks" target="_blank">udayks</a> [cite: 3]</p>
+        </div>
+
+        <form action="https://formspree.io/f/your-id" method="POST" class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="_replyto" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="cta-btn">Send Message</button>
+        </form>
+    </div>
+</section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
