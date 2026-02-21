@@ -3,95 +3,957 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uday Kiran Sahukari | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Uday Kiran Sahukari | Java Backend Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #87CEEB;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: 0.1s;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(135, 206, 235, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: 0.15s;
+            transform: translate(-50%, -50%);
+            filter: blur(2px);
+        }
+
+        /* Mouse-tracking light glow */
+        .mouse-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(135, 206, 235, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9997;
+            transform: translate(-50%, -50%);
+            transition: 0.05s linear;
+            mix-blend-mode: screen;
+        }
+
+        /* Particle network background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.5rem 0;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transform: translateY(-100%);
+            animation: slideDown 0.8s ease forwards;
+        }
+
+        @keyframes slideDown {
+            to { transform: translateY(0); }
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #fff, #87CEEB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: 0.3s;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #87CEEB;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        /* Hero Section with fade-in animation */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #87CEEB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(135, 206, 235, 0.3)); }
+            50% { filter: drop-shadow(0 0 20px rgba(135, 206, 235, 0.6)); }
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            color: #888;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: 2px solid #87CEEB;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(135, 206, 235, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: #87CEEB;
+            color: #0a0a0a;
+        }
+
+        /* Sections with scroll animations */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #fff, #87CEEB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1.8;
+            color: #aaa;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .extra-info {
+            background: rgba(255,255,255,0.03);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid rgba(135, 206, 235, 0.1);
+            margin-top: 2rem;
+        }
+
+        /* Skills Section with animated bars */
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            margin-bottom: 3rem;
+        }
+
+        .skill-category h3 {
+            color: #87CEEB;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #87CEEB, #5F9EA0);
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.1, 0.5, 0.2, 1);
+        }
+
+        /* Projects Grid with hover effects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 10px;
+            padding: 2px;
+            background: linear-gradient(45deg, #87CEEB, transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(135, 206, 235, 0.1);
+        }
+
+        .project-img {
+            height: 200px;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-img::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(135, 206, 235, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            color: #87CEEB;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-info p {
+            color: #aaa;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(135, 206, 235, 0.1);
+            color: #87CEEB;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(135, 206, 235, 0.2);
+        }
+
+        /* GitHub Repo Cards */
+        .github-section {
+            margin-top: 4rem;
+        }
+
+        .github-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .github-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: 0.3s;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .github-card:hover {
+            transform: translateY(-5px);
+            border-color: #87CEEB;
+        }
+
+        .github-card h4 {
+            color: #87CEEB;
+            margin-bottom: 0.5rem;
+        }
+
+        .github-card p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .github-stats {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .github-stats i {
+            color: #87CEEB;
+            margin-right: 0.3rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #aaa;
+        }
+
+        .contact-item i {
+            color: #87CEEB;
+            font-size: 1.2rem;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: linear-gradient(45deg, #87CEEB, #5F9EA0);
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(135, 206, 235, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: #666;
+        }
+
+        .social-links {
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: #fff;
+            margin: 0 1rem;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #87CEEB;
+            transform: translateY(-3px);
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #87CEEB, #5F9EA0);
+            z-index: 1000;
+            transition: width 0.1s;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cursor, .cursor-follower, .mouse-glow {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Custom Cursor Elements -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+    <div class="mouse-glow" id="mouseGlow"></div>
 
-    <nav class="navbar">
-        <div class="logo">UDAY.K</div>
-        <div class="nav-links">
-            <button class="tab-link active" onclick="openTab(event, 'home')">Home</button>
-            <button class="tab-link" onclick="openTab(event, 'experience')">Experience</button>
-            <button class="tab-link" onclick="openTab(event, 'projects')">Projects</button>
-            <button class="tab-link" onclick="openTab(event, 'contact')">Contact</button>
+    <!-- Particle Network Background -->
+    <div id="particles-js"></div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">UKS</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#skills">Skills</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi, my name is Uday Kiran Sahukari</h1>
+            <h2>I'm the Java Backend Developer.</h2>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View Work</a>
+                <a href="#contact" class="btn">Contact Me</a>
+            </div>
         </div>
-    </nav>
+    </section>
 
-    <main class="container">
-        <section id="home" class="tab-content active">
-            <div class="hero">
-                <h1>Uday Kiran <span class="highlight">Sahukari</span></h1>
-                <h3>Java Backend Developer & Analyst</h3>
-                <p>Detail-oriented developer with expertise in creating scalable solutions using Java and Spring frameworks.</p>
-                <div class="hero-btns">
-                    <a href="UDAY-KIRAN-SAHUKARI1.pdf" download class="download-btn">Download Resume (PDF)</a>
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <p>Detail-oriented Java Backend Developer with strong expertise in creating scalable and efficient solutions. Proficient in Java, Spring frameworks, and database management, with a proven track record of optimizing system functionalities and leading project implementations.</p>
+            
+            <p>Worked as an Analyst at GlobalLogic Technologies, where I focus on technical accuracy in AI responses and AR spatial recognition. Previously completed an internship at Kosuri Softlabs, developing RESTful APIs and user authentication modules.</p>
+            
+            <div class="extra-info">
+                <p><strong>Extra Information about me:</strong> Microsoft Certified: Azure AI Fundamentals. Completed Full Stack Java certification. Fluent in Telugu, English, and Hindi. When not coding, I enjoy exploring new technologies and solving complex problems.</p>
+            </div>
+            
+            <a href="#" style="display: inline-block; margin-top: 2rem; color: #87CEEB; text-decoration: none;">View Resume →</a>
+        </div>
+    </section>
+
+    <!-- Skills Section with Animated Bars -->
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Technical Skills</h3>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Java (Core & Advanced)</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="90"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Spring Boot</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>MySQL</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="80"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>RESTful APIs</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85"></div>
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <section id="experience" class="tab-content">
-            <h2>Professional Experience</h2>
-            <div class="exp-item">
-                <div class="exp-header">
-                    <h4>Analyst | GlobalLogic Technologies</h4>
-                    <span>06/2024 - Present</span>
+            <div class="skill-category">
+                <h3>Languages</h3>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Telugu</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="100"></div>
+                    </div>
                 </div>
-                <ul>
-                    <li>Evaluated optimal responses for technical accuracy and clarity.</li>
-                    <li>Mapped 3D coordinates for spatial AR recognition using internal tools.</li>
-                </ul>
-            </div>
-            <div class="exp-item">
-                <div class="exp-header">
-                    <h4>Java Backend Intern | Kosuri Softlabs</h4>
-                    <span>01/2024 - 06/2024</span>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>English</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="85"></div>
+                    </div>
                 </div>
-                <ul>
-                    <li>Optimized modules for user authentication and dashboard views using Spring Boot.</li>
-                    <li>Designed RESTful APIs for secure data exchange.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section id="projects" class="tab-content">
-            <h2>Core Projects</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>MrMason (HRMS)</h3>
-                    <p>Streamlined core HR functions, dashboard analytics, and customer data management.</p>
-                    <span class="tag">Spring Boot</span> <span class="tag">Java</span>
-                </div>
-                <div class="card">
-                    <h3>AR Annotation</h3>
-                    <p>Enabling users to annotate real-world environments using augmented reality technology.</p>
-                    <span class="tag">AR Tech</span> <span class="tag">Data Quality</span>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Hindi</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" data-width="70"></div>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-       <div id="local-clock" class="clock-display"></div>
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-img"></div>
+                <div class="project-info">
+                    <h3>MrMason - HRMS Platform</h3>
+                    <div class="project-date">January 2024 - June 2024</div>
+                    <p>Developed and optimized modules for user authentication, dashboard views, and customer data handling using Java and Spring Boot. Designed and implemented RESTful APIs for secure data exchange and system integration.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">REST APIs</span>
+                        <span class="tech-tag">MySQL</span>
+                    </div>
+                </div>
+            </div>
 
-<section id="contact" class="tab-content">
-    <h2>Get In Touch</h2>
-    <div class="contact-container">
-        <div class="info-block">
-            <p>📧 <a href="mailto:udaykiransahukari@gmail.com">udaykiransahukari@gmail.com</a> [cite: 2]</p>
-            <p>📍 Hyderabad, India [cite: 6]</p>
-            <p>🔗 LinkedIn: <a href="https://linkedin.com/in/udayks" target="_blank">udayks</a> [cite: 3]</p>
+            <div class="project-card">
+                <div class="project-img"></div>
+                <div class="project-info">
+                    <h3>AR Annotation Project</h3>
+                    <div class="project-date">September 2024 - January 2026</div>
+                    <p>Working on AR technology enabling users to annotate real-world environments. Using internal tools to tag objects, define bounding boxes, and map 3D coordinates for spatial recognition.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">AR Technology</span>
+                        <span class="tech-tag">3D Mapping</span>
+                        <span class="tech-tag">Data Quality</span>
+                        <span class="tech-tag">AI Labels</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <form action="https://formspree.io/f/your-id" method="POST" class="contact-form">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="_replyto" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit" class="cta-btn">Send Message</button>
-        </form>
-    </div>
-</section>
-    </main>
+        <!-- GitHub Repo Auto Cards -->
+        <div class="github-section">
+            <h3 style="text-align: center; color: #87CEEB; margin-bottom: 2rem;">GitHub Repositories</h3>
+            <div class="github-grid" id="githubRepos">
+                <!-- Repos will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Contact</h2>
+        <p style="color: #aaa; max-width: 600px; margin: 0 auto;">Interested in collaborating or have a backend development opportunity? Let's connect! I'm currently open to new challenges.</p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>udaykiransahukari@gmail.com</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+919390431131</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Hyderabad, India</span>
+            </div>
+        </div>
+
+        <a href="mailto:udaykiransahukari@gmail.com" class="contact-btn">Let's Work Together →</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/udayskiran"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/udayks"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2026 Uday Kiran Sahukari. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Mouse tracking light glow
+        const mouseGlow = document.getElementById('mouseGlow');
+        const cursor = document.querySelector('.cursor');
+        const cursorFollower = document.querySelector('.cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            mouseGlow.style.left = e.clientX + 'px';
+            mouseGlow.style.top = e.clientY + 'px';
+            
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            cursorFollower.style.left = e.clientX + 'px';
+            cursorFollower.style.top = e.clientY + 'px';
+        });
+
+        // Particles.js configuration with sky blue
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#87CEEB'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#87CEEB',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 1
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Scroll animations
+        const sections = document.querySelectorAll('section');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Animate skill bars when visible
+        const skillBars = document.querySelectorAll('.skill-progress');
+        
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = width + '%';
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+
+        // Scroll progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // GitHub repos (demo data - replace with your actual GitHub username)
+        // Replace with your actual GitHub username
+const GITHUB_USERNAME = 'udayskiran';
+
+async function loadGitHubRepos() {
+    try {
+        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`);
+        const repos = await response.json();
+        
+        const githubGrid = document.getElementById('githubRepos');
+        
+        if (repos.length === 0) {
+            githubGrid.innerHTML = '<p style="color: #aaa; text-align: center;">No public repositories found</p>';
+            return;
+        }
+        
+        githubGrid.innerHTML = repos.map(repo => `
+            <a href="${repo.html_url}" target="_blank" class="github-card">
+                <h4>${repo.name}</h4>
+                <p>${repo.description || 'No description provided'}</p>
+                <div class="github-stats">
+                    <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                    <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+                    <span><i class="fas fa-circle" style="color: #87CEEB;"></i> ${repo.language || 'Various'}</span>
+                </div>
+            </a>
+        `).join('');
+    } catch (error) {
+        console.error('Error fetching GitHub repos:', error);
+        document.getElementById('githubRepos').innerHTML = '<p style="color: #ff6b6b; text-align: center;">Failed to load repositories</p>';
+    }
+}
+
+// Load GitHub repos
+loadGitHubRepos();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
