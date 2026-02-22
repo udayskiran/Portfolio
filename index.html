@@ -135,9 +135,34 @@
             width: 100%;
         }
 
-        /* Hero Section with fade-in animation */
+        /* Profile Image Container */
+        .profile-image-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #87CEEB;
+            box-shadow: 0 0 30px rgba(135, 206, 235, 0.3);
+            animation: float 3s ease-in-out infinite;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Hero Section - FIXED with padding-top */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -146,6 +171,7 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1s ease forwards;
+            padding: 107px 2rem 80px; /* Top padding prevents header overlap */
         }
 
         @keyframes fadeInUp {
@@ -153,6 +179,11 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 900px;
         }
 
         .hero-content h1 {
@@ -179,6 +210,7 @@
             display: flex;
             gap: 1rem;
             justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn {
@@ -350,9 +382,20 @@
 
         .project-img {
             height: 200px;
-            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
-            position: relative;
             overflow: hidden;
+            position: relative;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
         }
 
         .project-img::after {
@@ -365,6 +408,7 @@
             background: linear-gradient(45deg, transparent, rgba(135, 206, 235, 0.1), transparent);
             transform: rotate(45deg);
             animation: shimmer 3s infinite;
+            pointer-events: none;
         }
 
         @keyframes shimmer {
@@ -428,6 +472,7 @@
             transition: 0.3s;
             text-decoration: none;
             color: #fff;
+            display: block;
         }
 
         .github-card:hover {
@@ -539,12 +584,31 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hero {
+                padding: 140px 1.5rem 60px; /* More padding on mobile */
+            }
+            
+            .profile-image-container {
+                width: 140px;
+                height: 140px;
+            }
+            
             .hero-content h1 {
                 font-size: 2.5rem;
             }
 
             .hero-content h2 {
                 font-size: 1.3rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
             }
 
             .nav-links {
@@ -558,6 +622,16 @@
 
             .cursor, .cursor-follower, .mouse-glow {
                 display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 120px 1rem 40px;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -588,9 +662,16 @@
         </nav>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Profile Photo - NOW FIXED -->
     <section id="home" class="hero">
         <div class="hero-content">
+            <!-- Profile photo - no longer hidden behind header -->
+            <div class="profile-image-container">
+                <img src="https://raw.githubusercontent.com/udayskiran/Portfolio/main/profile.jpeg" 
+                     alt="Uday Kiran Sahukari" 
+                     class="profile-image">
+            </div>
+            
             <h1>Hi, my name is Uday Kiran Sahukari</h1>
             <h2>I'm the Java Backend Developer.</h2>
             <div class="hero-buttons">
@@ -612,7 +693,7 @@
                 <p><strong>Extra Information about me:</strong> Microsoft Certified: Azure AI Fundamentals. Completed Full Stack Java certification. Fluent in Telugu, English, and Hindi. When not coding, I enjoy exploring new technologies and solving complex problems.</p>
             </div>
             
-            <a href="#" style="display: inline-block; margin-top: 2rem; color: #87CEEB; text-decoration: none;">View Resume →</a>
+            <a href="https://raw.githubusercontent.com/udayskiran/Portfolio/main/resume.pdf" style="display: inline-block; margin-top: 2rem; color: #87CEEB; text-decoration: none;">View Resume →</a>
         </div>
     </section>
 
@@ -693,48 +774,49 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects Section with Your Screenshots -->
     <section id="projects">
         <h2>Projects</h2>
-        <!-- MrMason Project Card - Fix this section -->
-<div class="project-card">
-    <div class="project-img">
-        <img src="https://raw.githubusercontent.com/udayskiran/Portfolio/main/mrmason.png" 
-             alt="MrMason HRMS Platform" 
-             class="project-image">
-    </div>
-    <div class="project-info">
-        <h3>MrMason - HRMS Platform</h3>
-        <div class="project-date">January 2024 - June 2024</div>
-        <p>Developed and optimized modules for user authentication, dashboard views, and customer data handling using Java and Spring Boot. Designed and implemented RESTful APIs for secure data exchange and system integration.</p>
-        <div class="project-tech">
-            <span class="tech-tag">Java</span>
-            <span class="tech-tag">Spring Boot</span>
-            <span class="tech-tag">REST APIs</span>
-            <span class="tech-tag">MySQL</span>
-        </div>
-    </div>
-</div>
+        <div class="projects-grid">
+            <!-- MrMason Project Card with your screenshot -->
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://raw.githubusercontent.com/udayskiran/Portfolio/main/mrmason.png" 
+                         alt="MrMason HRMS Platform" 
+                         class="project-image">
+                </div>
+                <div class="project-info">
+                    <h3>MrMason - HRMS Platform</h3>
+                    <div class="project-date">January 2024 - June 2024</div>
+                    <p>Developed and optimized modules for user authentication, dashboard views, and customer data handling using Java and Spring Boot. Designed and implemented RESTful APIs for secure data exchange and system integration.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Java</span>
+                        <span class="tech-tag">Spring Boot</span>
+                        <span class="tech-tag">REST APIs</span>
+                        <span class="tech-tag">MySQL</span>
+                    </div>
+                </div>
+            </div>
 
-<!-- AR Project Card - Fix this section -->
-<div class="project-card">
-    <div class="project-img">
-        <img src="https://raw.githubusercontent.com/udayskiran/Portfolio/main/ar.jpeg" 
-             alt="AR Annotation Project" 
-             class="project-image">
-    </div>
-    <div class="project-info">
-        <h3>AR Annotation Project</h3>
-        <div class="project-date">September 2024 - January 2026</div>
-        <p>Working on AR technology enabling users to annotate real-world environments. Using internal tools to tag objects, define bounding boxes, and map 3D coordinates for spatial recognition.</p>
-        <div class="project-tech">
-            <span class="tech-tag">AR Technology</span>
-            <span class="tech-tag">3D Mapping</span>
-            <span class="tech-tag">Data Quality</span>
-            <span class="tech-tag">AI Labels</span>
-        </div>
-    </div>
-</div>
+            <!-- AR Project Card with your screenshot -->
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://raw.githubusercontent.com/udayskiran/Portfolio/main/ar.jpeg" 
+                         alt="AR Annotation Project" 
+                         class="project-image">
+                </div>
+                <div class="project-info">
+                    <h3>AR Annotation Project</h3>
+                    <div class="project-date">September 2024 - January 2026</div>
+                    <p>Working on AR technology enabling users to annotate real-world environments. Using internal tools to tag objects, define bounding boxes, and map 3D coordinates for spatial recognition.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">AR Technology</span>
+                        <span class="tech-tag">3D Mapping</span>
+                        <span class="tech-tag">Data Quality</span>
+                        <span class="tech-tag">AI Labels</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- GitHub Repo Auto Cards -->
@@ -758,7 +840,7 @@
             </div>
             <div class="contact-item">
                 <i class="fas fa-phone"></i>
-                <span>+919390431131</span>
+                <span>+91 9390431131</span>
             </div>
             <div class="contact-item">
                 <i class="fas fa-map-marker-alt"></i>
@@ -772,9 +854,9 @@
     <!-- Footer -->
     <footer>
         <div class="social-links">
-            <a href="https://github.com/udayskiran"><i class="fab fa-github"></i></a>
-            <a href="https://linkedin.com/in/udayks"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://github.com/udayskiran" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/udayks" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
         </div>
         <p>&copy; 2026 Uday Kiran Sahukari. All rights reserved.</p>
     </footer>
@@ -918,41 +1000,40 @@
             document.getElementById('scrollProgress').style.width = scrolled + '%';
         });
 
-        // GitHub repos (demo data - replace with your actual GitHub username)
-        // Replace with your actual GitHub username
-const GITHUB_USERNAME = 'udayskiran';
+        // GitHub repos - using your actual username
+        const GITHUB_USERNAME = 'udayskiran';
 
-async function loadGitHubRepos() {
-    try {
-        const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`);
-        const repos = await response.json();
-        
-        const githubGrid = document.getElementById('githubRepos');
-        
-        if (repos.length === 0) {
-            githubGrid.innerHTML = '<p style="color: #aaa; text-align: center;">No public repositories found</p>';
-            return;
+        async function loadGitHubRepos() {
+            try {
+                const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`);
+                const repos = await response.json();
+                
+                const githubGrid = document.getElementById('githubRepos');
+                
+                if (repos.length === 0) {
+                    githubGrid.innerHTML = '<p style="color: #aaa; text-align: center;">No public repositories found</p>';
+                    return;
+                }
+                
+                githubGrid.innerHTML = repos.map(repo => `
+                    <a href="${repo.html_url}" target="_blank" class="github-card">
+                        <h4>${repo.name}</h4>
+                        <p>${repo.description || 'No description provided'}</p>
+                        <div class="github-stats">
+                            <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                            <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+                            <span><i class="fas fa-circle" style="color: #87CEEB;"></i> ${repo.language || 'Various'}</span>
+                        </div>
+                    </a>
+                `).join('');
+            } catch (error) {
+                console.error('Error fetching GitHub repos:', error);
+                document.getElementById('githubRepos').innerHTML = '<p style="color: #ff6b6b; text-align: center;">Failed to load repositories</p>';
+            }
         }
-        
-        githubGrid.innerHTML = repos.map(repo => `
-            <a href="${repo.html_url}" target="_blank" class="github-card">
-                <h4>${repo.name}</h4>
-                <p>${repo.description || 'No description provided'}</p>
-                <div class="github-stats">
-                    <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
-                    <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
-                    <span><i class="fas fa-circle" style="color: #87CEEB;"></i> ${repo.language || 'Various'}</span>
-                </div>
-            </a>
-        `).join('');
-    } catch (error) {
-        console.error('Error fetching GitHub repos:', error);
-        document.getElementById('githubRepos').innerHTML = '<p style="color: #ff6b6b; text-align: center;">Failed to load repositories</p>';
-    }
-}
 
-// Load GitHub repos
-loadGitHubRepos();
+        // Load GitHub repos
+        loadGitHubRepos();
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
